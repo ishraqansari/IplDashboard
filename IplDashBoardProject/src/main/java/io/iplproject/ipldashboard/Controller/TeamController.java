@@ -3,6 +3,7 @@ package io.iplproject.ipldashboard.Controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import io.iplproject.ipldashboard.Model.Match;
 import io.iplproject.ipldashboard.Model.Team;
 import io.iplproject.ipldashboard.Repository.MatchRepository;
 import io.iplproject.ipldashboard.Repository.TeamRepository;
@@ -36,5 +37,15 @@ public class TeamController {
         team.setMatches(matchRepository.findLatestMatchesbyTeam(teamName,4));
 
         return team;
+    }
+    @GetMapping("/team/{teamName}/matches")
+    public List<Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year + 1, 1, 1);
+        return this.matchRepository.getMatchesByTeamBetweenDates(
+                teamName,
+                startDate,
+                endDate
+        );
     }
 }
