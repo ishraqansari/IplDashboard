@@ -22,7 +22,7 @@ public interface MatchRepository extends CrudRepository<Match, Long>  {
     );
 
 
-    default List<Match> findLatestMatchesbyTeam(String teamName, int count) {
+    default List<Match> findLatestMatchesByTeam(String teamName, int count) {
         return getByTeam1OrTeam2OrderByDateDesc(teamName, teamName, PageRequest.of(0, count));
     }
 
