@@ -109,6 +109,4 @@ public class Match {
         this.umpire2 = umpire2;
     }
 
-
-
 }
